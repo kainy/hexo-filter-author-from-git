@@ -17,13 +17,13 @@ hexo.extend.filter.register('before_post_render', data => {
 
 function getAuthor(data) {
   const filePath = getFilePath(data);
-  const author = execSync(`git log --follow --format="%an" -- ${filePath} | tail -1`);
+  const author = execSync(`git log --follow --format="%an" -- "${filePath}" | tail -1`);
   return author.toString().trim();
 }
 
 function getContributors(data) {
   const filePath = getFilePath(data);
-  const contributors = execSync(`git log --follow --reverse --format="%an" -- ${filePath}`);
+  const contributors = execSync(`git log --follow --reverse --format="%an" -- "${filePath}"`);
   return unique(contributors.toString().trim().split(/\s/));
 }
 
